@@ -1,6 +1,9 @@
 BDSup2Sub
 =========
 
+> [!IMPORTANT]  
+> This is a fork of mjuhasz/BDSup2Sub, focusing solely on the CLI.
+
 A tool to convert and tweak bitmap based subtitle streams
 ---------------------------------------------------------
 
