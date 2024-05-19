@@ -15,15 +15,10 @@
  */
 package bdsup2sub.utils;
 
-import bdsup2sub.tools.JFileFilter;
-
-import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.List;
 import java.util.Locale;
 
 public final class ToolBox {
@@ -53,68 +48,6 @@ public final class ToolBox {
         for (int i =0; i<s.length(); i++) {
             buffer[index+i] = (byte)s.charAt(i);
         }
-    }
-
-    /**
-     * Show a dialog with details about an exception
-     * @param ex Throwable/Exception to display
-     */
-    public static void showException(Throwable ex) {
-        String m;
-        m = "<html>";
-        m += ex.getClass().getName() + "<p>";
-        if (ex.getMessage() != null) {
-            m += ex.getMessage() + "<p>";
-        }
-        StackTraceElement ste[] = ex.getStackTrace();
-        for (StackTraceElement e : ste) {
-            m += e.toString() + "<p>";
-        }
-        m += "</html>";
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(null, m, "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    /**
-     * Get file name via "file chooser" dialog
-     * @param path   Default path (without file name).
-     * @param filename     Default file name (without path).
-     * @param extensions    Array of allowed extensions (without ".")
-     * @param loadDialog   If true, this is a load dialog, else it's a save dialog
-     * @param parent Parent component (Frame, Window)
-     * @return       Selected filename or null if canceled
-     */
-    public static String getFilename(String path, String filename, List<String> extensions, boolean loadDialog, Component parent) {
-        if (path == null || path.isEmpty()) {
-            path = ".";
-        }
-        JFileChooser fileChooser = new JFileChooser(path);
-        if (extensions != null) {
-            JFileFilter fileFilter = new JFileFilter();
-            for (String extension : extensions) {
-                fileFilter.addExtension(extension);
-            }
-            fileChooser.setFileFilter(fileFilter);
-        }
-        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        File file;
-        if (filename != null && !filename.isEmpty()) {
-            file = new File(FilenameUtils.addSeparator(path) + filename);
-            if (file.canRead()) {
-                fileChooser.setSelectedFile(file);
-            }
-        }
-        if (!loadDialog) {
-            fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
-        }
-        int returnVal = fileChooser.showDialog(parent, null);
-        if (returnVal == JFileChooser.APPROVE_OPTION) {
-            file = fileChooser.getSelectedFile();
-            if (file != null) {
-                return file.getAbsolutePath();
-            }
-        }
-        return null;
     }
 
     /**

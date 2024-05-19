@@ -273,7 +273,6 @@ public class BDSup2Sub {
         } catch (CoreException ex) {
             logger.error(ex.getMessage());
         } catch (Exception ex) {
-            ToolBox.showException(ex);
             logger.error(ex.getMessage());
         }
         // clean up

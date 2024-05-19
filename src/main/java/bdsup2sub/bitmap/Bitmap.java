@@ -19,7 +19,14 @@ import bdsup2sub.core.Logger;
 import bdsup2sub.tools.QuantizeFilter;
 import com.mortennobel.imagescaling.ResampleFilter;
 
-import java.awt.image.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ColorModel;
+import java.awt.image.DataBuffer;
+import java.awt.image.DataBufferByte;
+import java.awt.image.Raster;
+import java.awt.image.WritableRaster;
+import java.awt.image.SampleModel;
+import java.awt.image.SinglePixelPackedSampleModel;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -85,7 +92,7 @@ public class Bitmap {
     }
 
     public BufferedImage getImage(ColorModel colorModel) {
-        DataBuffer dataBuffer = new DataBufferByte(buffer, width * height);
+        DataBufferByte dataBuffer = new DataBufferByte(buffer, width * height);
         SampleModel sampleModel = new SinglePixelPackedSampleModel(DataBuffer.TYPE_BYTE, width, height, new int[]{ 0xff });
         WritableRaster raster = Raster.createWritableRaster(sampleModel, dataBuffer, null);
         return new BufferedImage(colorModel, raster, false, null);

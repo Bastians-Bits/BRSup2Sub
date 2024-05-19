@@ -30,7 +30,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -217,7 +216,6 @@ public class SupXml implements SubtitleStream {
         } catch (IOException e) {
             throw new CoreException(e.getMessage());
         } catch (OutOfMemoryError e) {
-            JOptionPane.showMessageDialog(null,"Out of heap! Use -Xmx256m to increase heap!","Error!", JOptionPane.WARNING_MESSAGE);
             throw new CoreException("Out of heap! Use -Xmx256m to increase heap!");
         }
     }
