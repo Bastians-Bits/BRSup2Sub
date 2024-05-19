@@ -72,7 +72,7 @@ public class SupBDParser {
                 if (Core.isCanceled()) {
                     throw new CoreException("Canceled by user!");
                 }
-                Core.setProgress(index);
+                //Core.setProgress(index);
                 segment = readPCSSegment(index);
                 switch (segment.type) {
                     case PGSSUP_PALETTE_SEGMENT:
@@ -288,7 +288,7 @@ public class SupBDParser {
         }
 
         removeLastFrameIfInvalid(odsCounter, pdsCounter);
-        Core.setProgress(bufferSize);
+        //Core.setProgress(bufferSize);
         countForcedFrames();
     }
 

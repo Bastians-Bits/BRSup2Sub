@@ -17,18 +17,13 @@ package bdsup2sub;
 
 import bdsup2sub.cli.CommandLineParser;
 import bdsup2sub.core.*;
-import bdsup2sub.gui.main.MainFrame;
 import bdsup2sub.tools.Props;
 import bdsup2sub.utils.*;
 import org.apache.commons.cli.ParseException;
-import org.simplericity.macify.eawt.Application;
-import org.simplericity.macify.eawt.DefaultApplication;
 
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-import static bdsup2sub.gui.support.GuiUtils.applyGtkThemeWorkarounds;
 
 public class BDSup2Sub {
 
@@ -218,37 +213,9 @@ public class BDSup2Sub {
         } else if (options.isPrintVersionMode()) {
             System.out.println(Constants.APP_NAME + " " + Constants.APP_VERSION);
         } else {
-            if (!options.isCliMode()) {
-                setupGUI();
-                SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        configuration.setCliMode(false);
-                        Application app = new DefaultApplication();
-                        MainFrame mainFrame = new MainFrame(options.getInputFile());
-                        app.addApplicationListener(mainFrame.getApplicationListener());
-                        mainFrame.setVisible(true);
-                    }
-                });
-            } else {
+         
                 runCliLoop();
-            }
-        }
-    }
-
-    private static void setupGUI() {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            // ignore
-        }
-
-        if (PlatformUtils.isLinux()) {
-            applyGtkThemeWorkarounds();
-        }
-
-        if (PlatformUtils.isMac()) {
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-            System.setProperty("com.apple.mrj.application.apple.menu.about.name", Constants.APP_NAME);
+            
         }
     }
 

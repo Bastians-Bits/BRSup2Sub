@@ -84,7 +84,7 @@ public class SubDvd implements DvdSubtitleStream {
             throw new CoreException(e.getMessage());
         }
         for (int i=0; i < subPictures.size(); i++) {
-            Core.setProgress(i);
+            //Core.setProgress(i);
             logger.info("# " + (i + 1) + "\n");
             logger.trace("Offset: " + ToolBox.toHexLeftZeroPadded(subPictures.get(i).getOffset(), 8) + "\n");
             long nextOfs;

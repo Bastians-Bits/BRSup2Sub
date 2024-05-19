@@ -68,7 +68,7 @@ public class SupHD implements SubtitleStream {
                 if (Core.isCanceled()) {
                     throw new CoreException("Canceled by user!");
                 }
-                Core.setProgress(index);
+                //Core.setProgress(index);
 
                 if (buffer.getWord(index) != 0x5350) {
                     throw new CoreException("ID 'SP' missing at index " + ToolBox.toHexLeftZeroPadded(index, 8) + "\n");

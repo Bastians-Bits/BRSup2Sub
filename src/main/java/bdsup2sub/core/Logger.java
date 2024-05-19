@@ -15,10 +15,6 @@
  */
 package bdsup2sub.core;
 
-import bdsup2sub.gui.main.MainFrameView;
-
-import javax.swing.*;
-
 public final class Logger {
 
     private static final Configuration configuration = Configuration.getInstance();
@@ -27,7 +23,7 @@ public final class Logger {
     private int errorCount;
     private int warningCount;
 
-    private MainFrameView mainFrame;
+    //private MainFrameView mainFrame;
 
     private Logger() {
     }
@@ -39,61 +35,61 @@ public final class Logger {
     public void warn(String message) {
         warningCount++;
         final String msg = "WARNING: " + message;
-        if (mainFrame != null) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    mainFrame.printToConsole(msg);
-                }
-            });
-        } else {
+        //if (mainFrame != null) {
+        //    SwingUtilities.invokeLater(new Runnable() {
+        //        @Override
+        //        public void run() {
+        //            mainFrame.printToConsole(msg);
+        //        }
+        //    });
+        //} else {
             System.out.print(msg);
-        }
+        //}
     }
 
     public void error(String message) {
         errorCount++;
         final String msg = "ERROR: " + message;
-        if (mainFrame != null) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    mainFrame.printToConsole(msg);
-                }
-            });
-        } else {
+        // if (mainFrame != null) {
+        //     SwingUtilities.invokeLater(new Runnable() {
+        //         @Override
+        //         public void run() {
+        //             mainFrame.printToConsole(msg);
+        //         }
+        //     });
+        // } else {
             System.out.print(msg);
-        }
+        //}
     }
 
     public void trace(String message) {
         final String msg = message;
         if (configuration.isVerbose()) {
-            if (mainFrame != null) {
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        mainFrame.printToConsole(msg);
-                    }
-                });
-            } else {
+            // if (mainFrame != null) {
+            //     SwingUtilities.invokeLater(new Runnable() {
+            //         @Override
+            //         public void run() {
+            //             mainFrame.printToConsole(msg);
+            //         }
+            //     });
+            // } else {
                 System.out.print(msg);
-            }
+            //}
         }
     }
 
     public void info(String message) {
         final String msg = message;
-        if (mainFrame != null) {
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    mainFrame.printToConsole(msg);
-                }
-            });
-        } else {
+        // if (mainFrame != null) {
+        //     SwingUtilities.invokeLater(new Runnable() {
+        //         @Override
+        //         public void run() {
+        //             mainFrame.printToConsole(msg);
+        //         }
+        //     });
+        // } else {
             System.out.print(msg);
-        }
+        //}
     }
 
     public int getErrorCount() {
@@ -141,9 +137,5 @@ public final class Logger {
         }
         resetWarningCounter();
         resetErrorCounter();
-    }
-
-    public void setMainFrame(MainFrameView mainFrame) {
-        this.mainFrame = mainFrame;
     }
 }

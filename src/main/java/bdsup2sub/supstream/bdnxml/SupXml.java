@@ -509,7 +509,7 @@ public class SupXml implements SubtitleStream {
                     subPictures.add(pic);
                     int num  = subPictures.size();
                     logger.info("#" + num + "\n");
-                    Core.setProgress(num);
+                    //Core.setProgress(num);
                     at = atts.getValue("InTC");
                     if (at != null) {
                         pic.setStartTime(timeStrXmlToPTS(at, fpsXml));

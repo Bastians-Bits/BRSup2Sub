@@ -36,7 +36,6 @@ import bdsup2sub.bitmap.Bitmap;
 import bdsup2sub.bitmap.BitmapWithPalette;
 import bdsup2sub.bitmap.ErasePatch;
 import bdsup2sub.bitmap.Palette;
-import bdsup2sub.gui.support.Progress;
 import bdsup2sub.supstream.SubPicture;
 import bdsup2sub.supstream.SubtitleStream;
 import bdsup2sub.supstream.bd.SupBD;
@@ -143,7 +142,7 @@ public class Core extends Thread {
     private static String fileName;
 
     /** Progress dialog for loading/exporting */
-    private static Progress progress;
+    //private static Progress progress;
     /** Maximum absolute value for progress bar */
     private static int progressMax;
     /** Last relative value for progress bar */
@@ -252,9 +251,9 @@ public class Core extends Thread {
         fileName = fname;
         progressMax = (int)(new File(fname)).length();
         progressLast = 0;
-        progress = new Progress(parent);
-        progress.setTitle("Loading");
-        progress.setText("Loading subtitle stream");
+        //progress = new Progress(parent);
+        //progress.setTitle("Loading");
+        //progress.setText("Loading subtitle stream");
         if (xml || sid == StreamID.XML) {
             runType = RunType.READXML;
         } else if (idx || sid == StreamID.DVDSUB || sid == StreamID.IDX) {
@@ -275,7 +274,7 @@ public class Core extends Thread {
         // start thread
         Thread t = new Thread(new Core());
         t.start();
-        progress.setVisible(true);
+        //progress.setVisible(true);
         while (t.isAlive()) {
             try  {
                 Thread.sleep(500);
@@ -299,9 +298,9 @@ public class Core extends Thread {
         fileName = fname;
         progressMax = subtitleStream.getFrameCount();
         progressLast = 0;
-        progress = new Progress(parent);
-        progress.setTitle("Exporting");
-        OutputMode outputMode = configuration.getOutputMode();
+        //progress = new Progress(parent);
+        //progress.setTitle("Exporting");
+        /*OutputMode outputMode = configuration.getOutputMode();
         if (outputMode == OutputMode.VOBSUB) {
             progress.setText("Exporting SUB/IDX");
         } else if (outputMode == OutputMode.BDSUP) {
@@ -310,12 +309,12 @@ public class Core extends Thread {
             progress.setText("Exporting XML/PNG");
         } else {
             progress.setText("Exporting SUP/IFO");
-        }
+        }/* */
         runType = RunType.CREATESUB;
         // start thread
         Thread t = new Thread(new Core());
         t.start();
-        progress.setVisible(true);
+        //progress.setVisible(true);
         while (t.isAlive()) {
             try  {
                 Thread.sleep(500);
@@ -1294,7 +1293,7 @@ public class Core extends Thread {
                     throw new CoreException("Canceled by user!");
                 }
                 // for threaded version (progress bar);
-                setProgress(i);
+                //setProgress(i);
 
                 SubPicture subPicture = subPictures[i];
                 if (outputMode == OutputMode.VOBSUB) {
@@ -1398,14 +1397,14 @@ public class Core extends Thread {
     public static void moveAllThreaded(JFrame parent) throws Exception {
         progressMax = subtitleStream.getFrameCount();
         progressLast = 0;
-        progress = new Progress(parent);
-        progress.setTitle("Moving");
-        progress.setText("Moving all captions");
+        //progress = new Progress(parent);
+        //progress.setTitle("Moving");
+        //progress.setText("Moving all captions");
         runType = RunType.MOVEALL;
         // start thread
         Thread t = new Thread(new Core());
         t.start();
-        progress.setVisible(true);
+        //progress.setVisible(true);
         while (t.isAlive()) {
             try  {
                 Thread.sleep(500);
@@ -1458,7 +1457,7 @@ public class Core extends Thread {
         if (!configuration.isCliMode()) {
             // in CLI mode, moving is done during export
             for (int idx=0; idx<subPictures.length; idx++) {
-                setProgress(idx);
+                //setProgress(idx);
                 if (!subPictures[idx].isWasDecoded()) {
                     convertSup(idx, idx+1, subPictures.length, true);
                 }
@@ -1654,7 +1653,7 @@ public class Core extends Thread {
      * Set progress in progress bar.
      * @param p Subtitle index processed
      */
-    public static void setProgress(long p) {
+    /*public static void setProgress(long p) {
         if (progress != null) {
             final int val = (int)((p * 100) / progressMax);
             if (val > progressLast) {
@@ -1673,7 +1672,7 @@ public class Core extends Thread {
                 }
             }
         }
-    }
+    }*/
 
     /**
      * Get input mode.
