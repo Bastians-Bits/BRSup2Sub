@@ -77,7 +77,12 @@ public class CommandLineParser {
     }
 
     public void parse(String... args) throws ParseException {
-        CommandLine line = new PosixParser().parse(options, args);
+        CommandLine line = new DefaultParser().parse(options, args);
+
+        if (line.getOptions().length == 0) {
+            printHelpMode = true;
+            return;
+        }
 
         if (line.hasOption(HELP)) {
             printHelpMode = true;
