@@ -2,11 +2,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>brsup2sub</groupId>
-    <artifactId>brsup2sub</artifactId>
+    <artifactId>cli</artifactId>
     <packaging>jar</packaging>
 
     <name>BRSup2Sub</name>
-    <version>5.2.0-SNAPSHOT</version>
+    <version>6.0.0-SNAPSHOT</version>
     <url>https://github.com/Bastians-Bits/BRSup2Sub</url>
 
     <properties>
