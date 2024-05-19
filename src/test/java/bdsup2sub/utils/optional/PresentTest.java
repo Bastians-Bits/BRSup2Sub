@@ -19,6 +19,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.util.Optional;
+
 public class PresentTest {
 
     private Optional<String> subject = Optional.of("foo");

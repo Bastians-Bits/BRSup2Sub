@@ -99,7 +99,7 @@ public class CommandLineParserTest {
         infile.deleteOnExit();
         subject.parse("--output", "out.sup", infile.getAbsolutePath());
         assertEquals(new File("out.sup"), subject.getOutputFile());
-        assertEquals(OutputMode.BDSUP, subject.getOutputMode().orNull());
+        assertEquals(OutputMode.BDSUP, subject.getOutputMode().orElse(null));
     }
 
     @Test(expected = ParseException.class)

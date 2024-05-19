@@ -20,22 +20,25 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 public class AbsentTest {
 
-    private Optional<String> subject = Optional.absent();
+    private Optional<String> subject = Optional.empty();
 
     @Test
     public void shouldNotBePresent() throws Exception {
         assertFalse(subject.isPresent());
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test(expected = NoSuchElementException.class)
     public void shouldGetBeIllegal() throws Exception {
         subject.get();
     }
 
     @Test
     public void shouldReturnNullForValue() throws Exception {
-        assertNull(subject.orNull());
+        assertNull(subject.orElse(null));
     }
 }
