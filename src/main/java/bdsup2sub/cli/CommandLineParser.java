@@ -79,7 +79,7 @@ public class CommandLineParser {
     public void parse(String... args) throws ParseException {
         CommandLine line = new DefaultParser().parse(options, args);
 
-        if (line.getOptions().length == 0) {
+        if (args == null || args.length == 0) {
             printHelpMode = true;
             return;
         }

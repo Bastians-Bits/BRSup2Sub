@@ -132,7 +132,7 @@ public class CommandLineParserTest {
 
     @Test
     public void shouldLoadSettingsIfNotDefinedAndNotInCliMode() throws Exception {
-        subject.parse();
+        subject.parse("-L");
         assertTrue(subject.isLoadSettings());
     }
 
