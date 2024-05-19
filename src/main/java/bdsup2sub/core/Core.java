@@ -143,8 +143,10 @@ public class Core extends Thread {
     /** Progress dialog for loading/exporting */
     //private static Progress progress;
     /** Maximum absolute value for progress bar */
+    @SuppressWarnings("unused")
     private static int progressMax;
     /** Last relative value for progress bar */
+    @SuppressWarnings("unused")
     private static int progressLast;
 
     /** Functionality executed in the started thread */
@@ -839,6 +841,8 @@ public class Core extends Thread {
                 case CLEAR:
                     picTrg.setForced(false);
                     break;
+                default:
+                    break;
             }
 
             double scaleX;
@@ -978,6 +982,8 @@ public class Core extends Thread {
                     break;
                 case CLEAR:
                     subPictures[i].setForced(false);
+                    break;
+                default:
                     break;
             }
 
@@ -1432,6 +1438,8 @@ public class Core extends Thread {
             case MOVE_OUTSIDE_BOUNDS:
                 sy = "outside";
                 break;
+            default:
+                break;
         }
         String sx = null;
         switch (configuration.getMoveModeX()) {
@@ -1443,6 +1451,8 @@ public class Core extends Thread {
                 break;
             case RIGHT:
                 sx = "right";
+            default:
+                break;
         }
         String s = "Moving captions ";
         if (sy!= null) {
@@ -1549,6 +1559,8 @@ public class Core extends Thread {
             case CENTER:
                 pic.setOfsX((w-wi)/2);
                 break;
+            default:
+                break;
         }
     }
 
@@ -1580,20 +1592,6 @@ public class Core extends Thread {
             } catch (IOException ex) {
             }
         }
-    }
-
-    /**
-     * Count the number of forced subpictures to be exported.
-     * @return Number of forced subpictures to be exported
-     */
-    private static int countForcedIncluded() {
-        int n = 0;
-        for (SubPicture pic : subPictures) {
-            if (pic.isForced() && !pic.isExcluded()) {
-                n++;
-            }
-        }
-        return n;
     }
 
     /**
