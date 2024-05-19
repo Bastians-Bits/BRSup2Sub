@@ -742,19 +742,19 @@ public class CommandLineParserTest {
 
     @Test
     public void shouldAcceptValidLuminanceLowMedThresholdArg() throws Exception {
-        subject.parse("--lum-low-med-thr", "75");
+        subject.parse("--lum-low-med-threshold", "75");
         assertEquals(75, subject.getLumLowMedThreshold().get().intValue());
     }
 
     @Test
     public void shouldAcceptValidLuminanceMedHighThresholdArg() throws Exception {
-        subject.parse("--lum-med-hi-thr", "230");
+        subject.parse("--lum-med-high-threshold", "230");
         assertEquals(230, subject.getLumMedHighThreshold().get().intValue());
     }
 
     @Test(expected = ParseException.class)
     public void shouldRejectLuminanceLowMedBeingGreaterThanMedHigh() throws Exception {
-        subject.parse("--lum-low-med-thr", "75", "--lum-med-hi-thr", "50");
+        subject.parse("--lum-low-med-threshold", "75", "--lum-med-hi-thr", "50");
     }
 
     @Test(expected = ParseException.class)

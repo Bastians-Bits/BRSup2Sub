@@ -26,7 +26,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
@@ -183,6 +182,8 @@ public class Core extends Thread {
                     break;
                 case MOVEALL:
                     moveAllToBounds();
+                    break;
+                default:
                     break;
             }
         } catch (Exception ex) {

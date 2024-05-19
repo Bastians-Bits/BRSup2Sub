@@ -600,14 +600,11 @@ public class CommandLineParser {
 
     public void printHelp() {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.setOptionComparator(new Comparator() {
+        formatter.setOptionComparator(new Comparator<Option>() {
             @Override
-            public int compare(Object o1, Object o2) {
-                Option opt1 = (Option) o1;
-                Option opt2 = (Option) o2;
-
-                int opt1Index = OPTION_ORDER.indexOf(opt1.getOpt());
-                int opt2Index = OPTION_ORDER.indexOf(opt2.getOpt());
+            public int compare(Option o1, Option o2) {
+                int opt1Index = OPTION_ORDER.indexOf(o1.getOpt());
+                int opt2Index = OPTION_ORDER.indexOf(o2.getOpt());
 
                 return (int) Math.signum(opt1Index - opt2Index);
             }

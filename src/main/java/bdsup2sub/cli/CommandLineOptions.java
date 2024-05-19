@@ -71,209 +71,263 @@ public class CommandLineOptions {
     }
 
     private void createAndAddOptions() {
-        Option help = OptionBuilder
-                .withLongOpt("help")
-                .withDescription("Show usage information and exit.")
-                .hasArg(false).create(HELP);
+        Option help = Option
+                .builder(HELP)
+                .longOpt("help")
+                .desc("Show usage information and exit.")
+                .build();
         options.addOption(help);
 
-        Option version = OptionBuilder
-                .withLongOpt("version")
-                .withDescription("Show version information and exit.")
-                .hasArg(false).create(VERSION);
+        Option version = Option
+                .builder(VERSION)
+                .longOpt("version")
+                .desc("Show version information and exit.")
+                .build();
         options.addOption(version);
 
-        Option output = OptionBuilder
-                .withLongOpt("output")
-                .withDescription("Specify output file.")
-                .hasArg().create(OUTPUT_FILE);
+        Option output = Option
+                .builder(OUTPUT_FILE)
+                .longOpt("output")
+                .desc("Specify output file.")
+                .hasArg()
+                .argName("filename")
+                .build();
         options.addOption(output);
 
-        Option verbose = OptionBuilder
-                .withLongOpt("verbose")
-                .withDescription("Verbose console output mode.")
-                .hasArg(false).create(VERBOSE);
+        Option verbose = Option
+                .builder(VERBOSE)
+                .longOpt("verbose")
+                .desc("Verbose console output mode.")
+                .build();
         options.addOption(verbose);
 
-        Option loadSettings = OptionBuilder
-                .withLongOpt("load-settings")
-                .withDescription("Load settings stored in configuration file even if running in command-line mode.")
-                .hasArg(false).create(LOAD_SETTINGS);
+        Option loadSettings = Option
+                .builder(LOAD_SETTINGS)
+                .longOpt("load-settings")
+                .desc("Load settings stored in configuration file even if running in command-line mode.")
+                .build();
         options.addOption(loadSettings);
 
-        Option resolution = OptionBuilder
-                .withArgName("resolution")
-                .withLongOpt("resolution")
-                .withDescription("Set resolution to: keep, ntsc=480, pal=576, 720p=720, 1080p=1080, 1440x1080\nDefault: keep")
-                .hasArg().create(RESOLUTION);
+        Option resolution = Option
+                .builder(RESOLUTION)
+                .longOpt("resolution")
+                .desc("Set resolution to: keep, ntsc=480, pal=576, 720p=720, 1080p=1080, 1440x1080\nDefault: keep")
+                .hasArg()
+                .argName("resolution")
+                .build();
         options.addOption(resolution);
 
         OptionGroup framerateGroup = new OptionGroup();
-        Option targetFrameRate = OptionBuilder
-                .withArgName("fps")
-                .withLongOpt("fps-target")
-                .withDescription("Synchronize target frame rate to <fps>.\nPredefined values: 24p=23.976, pal or 25p=25, ntsc or 30p=29.967, keep (preserves the source fps for BD&XML, else default)\nDefault: automatic (dumb!).")
-                .hasArg().create(TARGET_FRAMERATE);
-        framerateGroup.addOption(targetFrameRate);
+        {
+                Option targetFrameRate = Option
+                        .builder(TARGET_FRAMERATE)
+                        .longOpt("fps-target")
+                        .desc("Synchronize target frame rate to <fps>.\nPredefined values: 24p=23.976, pal or 25p=25, ntsc or 30p=29.967, keep (preserves the source fps for BD&XML, else default)\nDefault: automatic (dumb!).")
+                        .hasArg()
+                        .argName("fps")
+                        .build();
+                framerateGroup.addOption(targetFrameRate);
 
-        Option convertFrameRate = OptionBuilder
-                .withArgName("src>, <trg")
-                .withLongOpt("convert-fps")
-                .withDescription("Convert frame rate from <src> to <trg>\nSupported values: 24p=23.976, 25p=25, 30p=29.970\nauto,<trg> detects source frame rate.")
-                .withValueSeparator(',')
-                .hasArgs(2).create(CONVERT_FRAMERATE);
-        framerateGroup.addOption(convertFrameRate);
-
+                Option convertFrameRate = Option
+                        .builder(CONVERT_FRAMERATE)
+                        .longOpt("convert-fps")
+                        .desc("Convert frame rate from src to trg\nSupported values: 24p=23.976, 25p=25, 30p=29.970\nauto,trg detects source frame rate.")
+                        .numberOfArgs(2)
+                        .argName("src,trg")
+                        .valueSeparator(',')
+                        .build();
+                framerateGroup.addOption(convertFrameRate);
+        }
         options.addOptionGroup(framerateGroup);
 
-        Option delay = OptionBuilder
-                .withArgName("delay")
-                .withLongOpt("delay")
-                .withDescription("Set delay in ms\nDefault: 0.0")
-                .hasArg().create(DELAY);
+        Option delay = Option
+                .builder(DELAY)
+                .longOpt("delay")
+                .desc("Set delay in ms\nDefault: 0.0")
+                .hasArg()
+                .argName("delay")
+                .build();
         options.addOption(delay);
 
-        Option filter = OptionBuilder
-                .withArgName("filter")
-                .withLongOpt("filter")
-                .withDescription("Set the filter to use for scaling.\nSupported values: bilinear, triangle, bicubic, bell, b-spline, hermite, lanczos3, mitchell\nDefault: bilinear")
-                .hasArg().create(SCALING_FILTER);
+        Option filter = Option
+                .builder(SCALING_FILTER)
+                .longOpt("filter")
+                .desc("Set the filter to use for scaling.\nSupported values: bilinear, triangle, bicubic, bell, b-spline, hermite, lanczos3, mitchell\nDefault: bilinear")
+                .hasArg()
+                .argName("filter")
+                .build();
         options.addOption(filter);
 
-        Option paletteMode = OptionBuilder
-                .withArgName("mode")
-                .withLongOpt("palette-mode")
-                .withDescription("Set palette mode.\nSupported values: keep, create, dither\nDefault: create")
-                .hasArg().create(PALETTE_MODE);
+        Option paletteMode = Option
+                .builder(PALETTE_MODE)
+                .longOpt("palette-mode")
+                .desc("Set palette mode.\nSupported values: keep, create, dither\nDefault: create")
+                .hasArg()
+                .argName("mode")
+                .build();
         options.addOption(paletteMode);
 
-        Option minDisplayTime = OptionBuilder
-                .withArgName("time")
-                .withLongOpt("minimum-time")
-                .withDescription("Set minimum display time in ms.\nDefault: 500")
-                .hasArg().create(MIN_DISPLAY_TIME);
+        Option minDisplayTime = Option
+                .builder(MIN_DISPLAY_TIME)
+                .longOpt("minimum-time")
+                .desc("Set minimum display time in ms.\nDefault: 500")
+                .hasArg()
+                .argName("time")
+                .build();
         options.addOption(minDisplayTime);
 
-        Option maxTimeDiff = OptionBuilder
-                .withArgName("time")
-                .withLongOpt("merge-time")
-                .withDescription("Set maximum time difference for merging subtitles in ms.\nDefault: 200")
-                .hasArg().create(MAX_TIME_DIFF);
+        Option maxTimeDiff = Option
+                .builder(MAX_TIME_DIFF)
+                .longOpt("merge-time")
+                .desc("Set maximum time difference for merging subtitles in ms.\nDefault: 200")
+                .hasArg()
+                .argName("time")
+                .build();
         options.addOption(maxTimeDiff);
 
         OptionGroup moveGroup = new OptionGroup();
-        Option moveIn = OptionBuilder
-                .withArgName("ratio, offset")
-                .withLongOpt("move-in")
-                .withDescription("Move captions inside screen ratio <ratio>, +/- offset <offset>")
-                .withValueSeparator(',')
-                .hasArgs(2).create(MOVE_IN);
-        moveGroup.addOption(moveIn);
-
-        Option moveOut = OptionBuilder
-                .withArgName("ratio, offset")
-                .withLongOpt("move-out")
-                .withDescription("Move captions outside screen ratio <ratio>, +/- offset <offset>")
-                .withValueSeparator(',')
-                .hasArgs(2).create(MOVE_OUT);
-        moveGroup.addOption(moveOut);
-
+        {
+                Option moveIn = Option
+                        .builder(MOVE_IN)
+                        .longOpt("move-in")
+                        .desc("Move captions inside screen ratio <ratio>, +/- offset <offset>")
+                        .numberOfArgs(2)
+                        .argName("ratio,offset")
+                        .valueSeparator(',')
+                        .build();
+                moveGroup.addOption(moveIn);
+        
+                Option moveOut = Option
+                        .builder(MOVE_OUT)
+                        .longOpt("move-out")
+                        .desc("Move captions outside screen ratio <ratio>, +/- offset <offset>")
+                        .numberOfArgs(2)
+                        .argName("ratio,offset")
+                        .valueSeparator(',')
+                        .build();
+                moveGroup.addOption(moveOut);
+        }
         options.addOptionGroup(moveGroup);
 
-        Option moveX = OptionBuilder
-                .withArgName("pos[, offset]")
-                .withLongOpt("move-x")
-                .withDescription("Move captions horizontally from specified position. <pos> may be left, right, center\n+/- optional offset <offset> (only if moving left or right)")
-                .withValueSeparator(',')
-                .hasOptionalArgs(2).create(MOVE_X);
+        Option moveX = Option
+                .builder(MOVE_X)
+                .longOpt("move-x")
+                .desc("Move captions horizontally from specified position. <pos> may be left, right, center\n+/- optional offset <offset> (only if moving left or right)")
+                .optionalArg(true)
+                .numberOfArgs(2)
+                .argName("pos[, offset]")
+                .valueSeparator(',')
+                .build();
         options.addOption(moveX);
 
-        Option cropLines = OptionBuilder
-                .withArgName("n")
-                .withLongOpt("crop-y")
-                .withDescription("Crop the upper/lower n lines.\nDefault: 0")
-                .hasArg().create(CROP_LINES);
+        Option cropLines = Option
+                .builder(CROP_LINES)
+                .longOpt("crop-y")
+                .desc("Crop the upper/lower n lines.\nDefault: 0")
+                .hasArg()
+                .argName("n")
+                .build();
         options.addOption(cropLines);
 
-        Option alphaCropThreshold = OptionBuilder
-                .withArgName("n")
-                .withLongOpt("alpha-crop")
-                .withDescription("Set the alpha cropping threshold.\nDefault: 10")
-                .hasArg().create(ALPHA_CROP_THRESHOLD);
+        Option alphaCropThreshold = Option
+                .builder(ALPHA_CROP_THRESHOLD)
+                .longOpt("alpha-crop")
+                .desc("Set the alpha cropping threshold.\nDefault: 10")
+                .hasArg()
+                .argName("n")
+                .build();
         options.addOption(alphaCropThreshold);
 
-        Option scale = OptionBuilder
-                .withArgName("x, y")
-                .withLongOpt("scale")
-                .withDescription("Scale captions horizontally and vertically.\nDefault: 1.0,1.0")
-                .withValueSeparator(',')
-                .hasArgs(2).create(SCALE);
+        Option scale = Option
+                .builder(SCALE)
+                .longOpt("scale")
+                .desc("Scale captions horizontally and vertically.\nDefault: 1.0,1.0")
+                .numberOfArgs(2)
+                .argName("x,y")
+                .valueSeparator(',')
+                .build();
         options.addOption(scale);
 
-        Option exportPalette = OptionBuilder
-                .withLongOpt("export-palette")
-                .withDescription("Export target palette in PGCEdit format.")
-                .hasArg(false).create(EXPORT_PALETTE);
+        Option exportPalette = Option
+                .builder(EXPORT_PALETTE)
+                .longOpt("export-palette")
+                .desc("Export target palette in PGCEdit format.")
+                .build();
         options.addOption(exportPalette);
 
-        Option exportForcedSubtitlesOnly = OptionBuilder
-                .withLongOpt("forced-only")
-                .withDescription("Export only forced subtitles (when converting from BD-SUP).")
-                .hasArg(false).create(EXPORT_FORCED_SUBTITLES_ONLY);
+        Option exportForcedSubtitlesOnly = Option
+                .builder(EXPORT_FORCED_SUBTITLES_ONLY)
+                .longOpt("forced-only")
+                .desc("Export only forced subtitles (when converting from BD-SUP).")
+                .build();
         options.addOption(exportForcedSubtitlesOnly);
 
-        Option setForcedFlag = OptionBuilder
-                .withArgName("state")
-                .withLongOpt("force-all")
-                .withDescription("Set or clear the forced flag for all subtitles.\nSupported values: set, clear")
-                .hasArg().create(FORCED_FLAG);
+        Option setForcedFlag = Option
+                .builder(FORCED_FLAG)
+                .longOpt("force-all")
+                .desc("Set or clear the forced flag for all subtitles.\nSupported values: set, clear")
+                .hasArg()
+                .argName("state")
+                .build();
         options.addOption(setForcedFlag);
 
-        Option swapCrCb = OptionBuilder
-                .withLongOpt("swap")
-                .withDescription("Swap Cr/Cb components when loading a BD/HD-DVD sup file.")
-                .hasArg(false).create(SWAP_CR_CB);
+        Option swapCrCb = Option
+                .builder(SWAP_CR_CB)
+                .longOpt("swap")
+                .desc("Swap Cr/Cb components when loading a BD/HD-DVD sup file.")
+                .build();
         options.addOption(swapCrCb);
 
-        Option fixInvisibleFrames = OptionBuilder
-                .withLongOpt("fix-invisible")
-                .withDescription("Fix zero alpha frame palette for SUB/IDX and SUP/IFO.")
-                .hasArg(false).create(FIX_INVISIBLE_FRAMES);
+        Option fixInvisibleFrames = Option
+                .builder(FIX_INVISIBLE_FRAMES)
+                .longOpt("fix-invisible")
+                .desc("Fix zero alpha frame palette for SUB/IDX and SUP/IFO.")
+                .build();
         options.addOption(fixInvisibleFrames);
 
-        Option alphaThreshold = OptionBuilder
-                .withArgName("n")
-                .withLongOpt("alpha-thr")
-                .withDescription("Set alpha threshold 0..255 for SUB/IDX conversion.\nDefault: 80")
-                .hasArg().create(ALPHA_THRESHOLD);
+        Option alphaThreshold = Option
+                .builder(ALPHA_THRESHOLD)
+                .longOpt("alpha-threshold")
+                .desc("Set alpha threshold 0..255 for SUB/IDX conversion.\nDefault: 80")
+                .hasArg()
+                .argName("n")
+                .build();
         options.addOption(alphaThreshold);
 
-        Option luminanceLowMedThreshold = OptionBuilder
-                .withArgName("n")
-                .withLongOpt("lum-low-med-thr")
-                .withDescription("Set luminance lo/med threshold 0..255 for SUB/IDX conversion.\nDefault: auto")
-                .hasArg().create(LUM_LOW_MED_THRESHOLD);
+        Option luminanceLowMedThreshold = Option
+                .builder(LUM_LOW_MED_THRESHOLD)
+                .longOpt("lum-low-med-threshold")
+                .desc("Set luminance lo/med threshold 0..255 for SUB/IDX conversion.\nDefault: auto")
+                .hasArg()
+                .argName("n")
+                .build();
         options.addOption(luminanceLowMedThreshold);
 
-        Option luminanceMedHighThreshold = OptionBuilder
-                .withArgName("n")
-                .withLongOpt("lum-med-hi-thr")
-                .withDescription("Set luminance med/hi threshold 0..255 for SUB/IDX conversion.\nDefault: auto")
-                .hasArg().create(LUM_MED_HIGH_THRESHOLD);
+        Option luminanceMedHighThreshold = Option
+                .builder(LUM_MED_HIGH_THRESHOLD)
+                .longOpt("lum-med-high-threshold")
+                .desc("Set luminance med/hi threshold 0..255 for SUB/IDX conversion.\nDefault: auto")
+                .hasArg()
+                .argName("n")
+                .build();
         options.addOption(luminanceMedHighThreshold);
 
-        Option languageCode = OptionBuilder
-                .withArgName("language")
-                .withLongOpt("language")
-                .withDescription("Set language for SUB/IDX export.\nDefault: en")
-                .hasArg().create(LANGUAGE_CODE);
+        Option languageCode = Option
+                .builder(LANGUAGE_CODE)
+                .longOpt("language")
+                .desc("Set language for SUB/IDX export.\nDefault: en")
+                .hasArg()
+                .argName("language")
+                .build();
         options.addOption(languageCode);
 
-        Option paletteFile = OptionBuilder
-                .withArgName("file")
-                .withLongOpt("palette-file")
-                .withDescription("Load palette file for SUB/IDX conversion. Overrides default palette.")
-                .hasArg().create(PALETTE_FILE);
+        Option paletteFile = Option
+                .builder(PALETTE_FILE)
+                .longOpt("palette-file")
+                .desc("Load palette file for SUB/IDX conversion. Overrides default palette.")
+                .hasArg()
+                .argName("file")
+                .build();
         options.addOption(paletteFile);
     }
 }

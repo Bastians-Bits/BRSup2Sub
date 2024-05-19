@@ -109,7 +109,7 @@ public class CommandLineOptionsTest {
         assertEquals(2, options.getOption(option).getArgs());
         assertFalse(options.getOption(option).hasOptionalArg());
         assertEquals(',', options.getOption(option).getValueSeparator());
-        assertEquals("src>, <trg", options.getOption(option).getArgName());
+        assertEquals("src,trg", options.getOption(option).getArgName());
     }
 
     @Test
@@ -184,7 +184,7 @@ public class CommandLineOptionsTest {
         assertEquals(2, options.getOption(option).getArgs());
         assertFalse(options.getOption(option).hasOptionalArg());
         assertEquals(',', options.getOption(option).getValueSeparator());
-        assertEquals("ratio, offset", options.getOption(option).getArgName());
+        assertEquals("ratio,offset", options.getOption(option).getArgName());
     }
 
     @Test
@@ -196,7 +196,7 @@ public class CommandLineOptionsTest {
         assertEquals(2, options.getOption(option).getArgs());
         assertFalse(options.getOption(option).hasOptionalArg());
         assertEquals(',', options.getOption(option).getValueSeparator());
-        assertEquals("ratio, offset", options.getOption(option).getArgName());
+        assertEquals("ratio,offset", options.getOption(option).getArgName());
     }
 
     @Test
@@ -250,7 +250,7 @@ public class CommandLineOptionsTest {
         assertEquals(2, options.getOption(option).getArgs());
         assertFalse(options.getOption(option).hasOptionalArg());
         assertEquals(',', options.getOption(option).getValueSeparator());
-        assertEquals("x, y", options.getOption(option).getArgName());
+        assertEquals("x,y", options.getOption(option).getArgName());
     }
 
     @Test
@@ -304,7 +304,7 @@ public class CommandLineOptionsTest {
     public void shouldHaveAlphaThresholdOption() {
         String option = "A";
         assertTrue(options.hasOption(option));
-        assertEquals("alpha-thr", options.getOption(option).getLongOpt());
+        assertEquals("alpha-threshold", options.getOption(option).getLongOpt());
         assertFalse(options.getOption(option).isRequired());
         assertTrue(options.getOption(option).hasArg());
         assertFalse(options.getOption(option).hasOptionalArg());
@@ -315,7 +315,7 @@ public class CommandLineOptionsTest {
     public void shouldHaveLuminanceLowMedThresholdOption() {
         String option = "M";
         assertTrue(options.hasOption(option));
-        assertEquals("lum-low-med-thr", options.getOption(option).getLongOpt());
+        assertEquals("lum-low-med-threshold", options.getOption(option).getLongOpt());
         assertFalse(options.getOption(option).isRequired());
         assertTrue(options.getOption(option).hasArg());
         assertFalse(options.getOption(option).hasOptionalArg());
@@ -326,7 +326,7 @@ public class CommandLineOptionsTest {
     public void shouldHaveLuminanceMedHighThresholdOption() {
         String option = "H";
         assertTrue(options.hasOption(option));
-        assertEquals("lum-med-hi-thr", options.getOption(option).getLongOpt());
+        assertEquals("lum-med-high-threshold", options.getOption(option).getLongOpt());
         assertFalse(options.getOption(option).isRequired());
         assertTrue(options.getOption(option).hasArg());
         assertFalse(options.getOption(option).hasOptionalArg());
