@@ -21,6 +21,7 @@ public abstract class Optional<T> implements Serializable {
 
     private static final long serialVersionUID = 0;
 
+    @SuppressWarnings("unchecked")
     public static <T> Optional<T> absent() {
         return (Optional<T>) Absent.INSTANCE;
     }
