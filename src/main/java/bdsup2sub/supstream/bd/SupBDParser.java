@@ -1,6 +1,5 @@
 package bdsup2sub.supstream.bd;
 
-import bdsup2sub.core.Configuration;
 import bdsup2sub.core.Core;
 import bdsup2sub.core.CoreException;
 import bdsup2sub.core.Logger;
@@ -17,8 +16,6 @@ import java.util.List;
 import static bdsup2sub.utils.TimeUtils.ptsToTimeStr;
 
 public class SupBDParser {
-
-    private static final Configuration configuration = Configuration.getInstance();
     private static final Logger logger = Logger.getInstance();
 
     private static final int PGSSUP_FILE_MAGIC = 0x5047;
@@ -182,6 +179,8 @@ public class SupBDParser {
                                     break;
                                 case NORMAL:
                                     message.append("NORM, ");
+                                    break;
+                                default:
                                     break;
                             }
                             message.append(" size: ").append(ToolBox.toHexLeftZeroPadded(segment.size, 4)).append(", composition number: ").append(compositionNumber).append(", forced: ").append(subPictureBD.isForced());

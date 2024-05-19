@@ -447,7 +447,6 @@ class OctTreeQuantizer {
      * @param table Output color table
      */
     public void buildColorTable(int[] pixels, int[] table) {
-        int count = pixels.length;
         maximumColors = table.length;
         for (int pixel : pixels) {
             insertColor(pixel);

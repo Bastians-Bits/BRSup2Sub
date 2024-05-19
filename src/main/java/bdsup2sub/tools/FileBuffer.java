@@ -206,6 +206,5 @@ public class FileBuffer {
         if (fi != null) {
             fi.close();
         }
-        super.finalize();
     }
 }

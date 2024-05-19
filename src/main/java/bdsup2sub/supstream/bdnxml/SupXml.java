@@ -547,6 +547,8 @@ public class SupXml implements SubtitleStream {
                     pic.storeOriginalOffsets();
                     txt = new StringBuffer();
                     break;
+                default:
+                    break;
             }
         }
 
