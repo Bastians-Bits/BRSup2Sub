@@ -27,11 +27,12 @@ public class StreamUtils {
     public static StreamID getStreamID(byte id[]) {
         StreamID sid;
 
+
         if (id[0]==0x50 && id[1]==0x47) {
             sid = StreamID.BDSUP;
         } else if (id[0]==0x53 && id[1]==0x50) {
             sid = StreamID.SUP;
-        } else if (id[0]==0x00 && id[1]==0x00 && id[2]==0x01 && id[3]==(byte)0xba) {
+        } else if (id[0]==0x00 && id[1]==0x00 && id[2]==0x01 && id[3]==0xba) {
             sid = StreamID.DVDSUB;
         } else if (id[0]==0x23 && id[1]==0x20 && id[2]==0x56 && id[3]==0x6f) {
             sid = StreamID.IDX;
